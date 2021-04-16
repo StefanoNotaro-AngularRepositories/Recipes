@@ -55,4 +55,5 @@ jobs:
           echo "Test"
           echo "Test2"
           dir deploy_dist/Recipes
-          npx angular-cli-ghpages --dir=./deploy_dist/Recipes
+          dir ./deploy_dist/Recipes
+          npx ngh --no-silent --dir=./deploy_dist/Recipes
