@@ -38,10 +38,12 @@ jobs:
       - name: Folder
         run: |
           dir
-          dir ..
+            dir ..
+            
+      - name: Folder2
+        run: |
+          dir Recipes
             
       - name: Deploy 🚀
         run: |
-          ngh --no-silent
           ngx angular-cli-ghpages --dir=dist/Recipes
-          ngh --no-silent
