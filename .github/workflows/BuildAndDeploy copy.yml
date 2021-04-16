@@ -13,20 +13,29 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+   build-and-deploy:
+     runs-on: ubuntu-latest
 
-      - name: Use Node 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
+     steps:
+     - name: Checkout
+       uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm ci
+     - name: Use Node.js 10.x
+       uses: actions/setup-node@v1
+       with:
+         node-version: 10.x
 
-      - name: Build
-        run: npm run ghDeploy
+     - name: Prepare and deploy
+       env:
+         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+       run: |
+         npm install
+         npm run lint
+         ###
+         # Configure Angular first!
+         ####
+         # npm test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
+         # npm run webdriver-update-ci
+         # npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js --webdriver-update=false
+         ####
+         npm run ng -- deploy --base-href=/Recipes/ --name="CI/CD" --email=stefano.notaro@gmail.com
