@@ -1,9 +1,12 @@
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand">Cara de torta</a>
+<nav class="navbar navbar-light">
+  <a href="/" class="navbar-brand">
+    <img src="../../../../assets/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    Cara de torta
+  </a>
   <form class="form-inline">
     <button class="btn my-2 my-sm-0" [ngClass]="{ 
-      'btn-outline-success': !isLogin,
-      'btn-outline-danger': isLogin
+      'btn-success': !isLogin,
+      'btn-danger': isLogin
     }" type="button" (click)="onClick()">
       {{!isLogin ? 'Login' : 'Logout'}}
     </button>
