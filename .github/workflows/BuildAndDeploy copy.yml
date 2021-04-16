@@ -51,4 +51,8 @@ jobs:
           name: deploy_dist
           
       - name: Deploy to GitHub Pages
-        run: npx angular-cli-ghpages --dir=deploy_dist
+        run: |
+          echo "Test"
+          echo "Test2"
+          dir
+          npx angular-cli-ghpages --dir=deploy_dist
