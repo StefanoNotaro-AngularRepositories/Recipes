@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ghBuild": "ng build --prod --optimization=false --base-href \"https://stefanonotaro-angularrepositories.github.io/Recipes/\"",
-    "ghDeploy": "npx angular-cli-ghpages --dir=dist/Recipes",
+    "ghDeploy": "ng deploy --base-href=/Recipes/",
     "build:ci": "ng build --prod --sourceMap=false --base-href \"https://stefanonotaro-angularrepositories.github.io/Recipes/\""
   },
   "private": true,
