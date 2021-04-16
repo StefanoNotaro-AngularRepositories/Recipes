@@ -54,6 +54,6 @@ jobs:
         run: |
           echo "Test"
           echo "Test2"
-          dir deploy_dist/Recipes
           dir ./deploy_dist/Recipes
           npx ngh --no-silent --dir=./deploy_dist/Recipes
+          ngh --no-silent --dir=./deploy_dist/Recipes
