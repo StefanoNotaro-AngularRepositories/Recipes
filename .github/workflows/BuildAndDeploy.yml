@@ -35,10 +35,6 @@ jobs:
             dist
             !dist/**/*.md
             
-      - name: foler
-        run: |
-          dir
-            
       - name: Deploy 🚀
         run: |
           npx angular-cli-ghpages
