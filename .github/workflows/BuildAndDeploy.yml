@@ -35,6 +35,10 @@ jobs:
             dist
             !dist/**/*.md
             
+      - name: Folder
+        run: |
+          dir dist/Recipes/
+            
       - name: Deploy 🚀
         run: |
-          npx angular-cli-ghpages
+          npx angular-cli-ghpages --dir=dist/Recipes
