@@ -54,5 +54,5 @@ jobs:
         run: |
           echo "Test"
           echo "Test2"
-          dir deploy_dist
-          npx angular-cli-ghpages --dir=./deploy_dist
+          dir deploy_dist/Recipes
+          npx angular-cli-ghpages --dir=./deploy_dist/Recipes
