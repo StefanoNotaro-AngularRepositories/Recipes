@@ -26,6 +26,7 @@ jobs:
         run: |
           npm install
                 npm run ghBuild
+                
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -36,4 +37,4 @@ jobs:
             
       - name: Deploy 🚀
         run: |
-          npm run ghDeploy
+          npx angular-cli-ghpages --dir=home/runner/work/Recipes/Recipes
