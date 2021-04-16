@@ -37,7 +37,8 @@ jobs:
             
       - name: Folder
         run: |
-          dir dist/Recipes/
+          dir
+          dir ..
             
       - name: Deploy 🚀
         run: |
