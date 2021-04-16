@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { environment } from '../environments/environment';
 
 // tslint:disable-next-line: ban-types
 declare let gtag: Function;
@@ -12,16 +14,11 @@ declare let gtag: Function;
 export class AppComponent {
   title = 'Recipes';
 
-  constructor(public router: Router) {
+  constructor(public router: Router, protected $gaService: GoogleAnalyticsService) {
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        gtag('config', 'xx-xxxxx-xx',
-          {
-            page_path: event.urlAfterRedirects
-          }
-        );
+      if (event instanceof NavigationEnd && environment.production) {
+        this.$gaService.pageView(event.urlAfterRedirects, event.urlAfterRedirects);
       }
-    }
-    )
+    });
   }
 }
