@@ -13,13 +13,10 @@
           <mat-error *ngIf="name.invalid">El nombre es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field class="col-6">
-          <mat-label>Unidad</mat-label>
-          <input matInput formControlName="unit">
-          <button mat-button *ngIf="unit.value" matSuffix mat-icon-button aria-label="Clear"
-            (click)="unit.setValue('')">
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-error *ngIf="name.invalid">La unidad es obligatoria</mat-error>
+          <mat-label>Choose an option</mat-label>
+          <mat-select formControlName="unit">
+            <mat-option *ngFor="let unit of ingredientUnits" [value]="unit.id">{{unit.name}}</mat-option>
+          </mat-select>
         </mat-form-field>
         <mat-form-field class="col-6">
           <mat-label>Precio</mat-label>
