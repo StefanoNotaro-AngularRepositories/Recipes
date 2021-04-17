@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AddIngredientDialogComponent } from './add-ingredient-dialog.component';
+import { IngredientDialogComponent } from './ingredient-dialog.component';
 
 describe('AddIngredientDialogComponent', () => {
-  let component: AddIngredientDialogComponent;
-  let fixture: ComponentFixture<AddIngredientDialogComponent>;
+  let component: IngredientDialogComponent;
+  let fixture: ComponentFixture<IngredientDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddIngredientDialogComponent ]
+      declarations: [IngredientDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddIngredientDialogComponent);
+    fixture = TestBed.createComponent(IngredientDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
