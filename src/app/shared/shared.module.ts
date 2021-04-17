@@ -14,7 +14,7 @@ const components = [
     CommonModule,
     AngularMaterialModule,
   ],
-  declarations: [components],
-  exports: [components]
+  declarations: [...components],
+  exports: [...components, AngularMaterialModule]
 })
 export class SharedModule { }

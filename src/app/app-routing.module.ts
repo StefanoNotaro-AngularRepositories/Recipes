@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import { environment } from '../environments/environment';
 import { IngredientsComponent } from './components/ingredients/ingredients.component';
 import { RecipesComponent } from './components/recipes/recipes.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
@@ -16,7 +17,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    NgxGoogleAnalyticsModule.forRoot('G-LH67LQM33Z'),
+    NgxGoogleAnalyticsModule.forRoot(environment.googleAnalytics.streamDataConnectionId),
     NgxGoogleAnalyticsRouterModule
   ],
   exports: [RouterModule]
