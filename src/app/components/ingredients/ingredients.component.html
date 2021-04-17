@@ -1,3 +1,10 @@
-<p>
-  ingredients works!
-</p>
+<div class="container mt-3">
+  <div class="row">
+    <h1 class="mr-auto">Ingredientes</h1>
+    <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon"
+      (click)="openAddIngredientDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+<p *ngFor="let ingredient of ingredientsVM">Nombre: {{ ingredient.name }}. Precio: {{ ingredient.price }}</p>
