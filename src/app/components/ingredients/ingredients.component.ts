@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddIngredientDialogComponent } from './dialogs/add-ingredient-dialog/add-ingredient-dialog.component';
-import { Ingredient } from './models/ingredient.viewmodel';
+import { IngredientDialogComponent } from './dialogs/ingredient-dialog/ingredient-dialog.component';
+import { Ingredient } from './models/ingredient.interface';
 import { IngredientsService } from './services/ingredients.service';
 
 @Component({
@@ -10,24 +10,26 @@ import { IngredientsService } from './services/ingredients.service';
   styleUrls: ['./ingredients.component.scss']
 })
 export class IngredientsComponent implements OnInit {
-  public ingredientsVM: Ingredient[] = [];
+  public ingredients: Ingredient[] = [];
 
   constructor(private ingredientsService: IngredientsService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.ingredientsService.get().subscribe(ingredients => {
-      this.ingredientsVM = ingredients as Ingredient[];
+      this.ingredients = ingredients as Ingredient[];
     });
   }
 
   public openAddIngredientDialog(): void {
-    const dialogRef = this.dialog.open(AddIngredientDialogComponent, {
+    const dialogRef = this.dialog.open(IngredientDialogComponent, {
       width: '500px',
       data: {}
     });
 
-    dialogRef.afterClosed().subscribe(x => {
-      console.log(x);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+      }
     });
   }
 

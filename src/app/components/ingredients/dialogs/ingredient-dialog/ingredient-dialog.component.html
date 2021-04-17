@@ -1,0 +1,40 @@
+<form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title>Agregar ingrediente</h1>
+  <div mat-dialog-content>
+    <div class="container">
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name">
+          <button mat-button *ngIf="name.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="name.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="name.invalid">El nombre es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>Unidad</mat-label>
+          <input matInput formControlName="unit">
+          <button mat-button *ngIf="unit.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="unit.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="name.invalid">La unidad es obligatoria</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>Precio</mat-label>
+          <input matInput tpye="number" formControlName="price">
+          <button mat-button *ngIf="price.value" matSuffix mat-icon-button aria-label="Clear"
+            (click)="price.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="name.invalid">El precio es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="d-flex float-right">
+    <button mat-button (click)="onNoClick()" type="button">Cancelar</button>
+    <button mat-button color="primary" type="submit" cdkFocusInitial>Guardar</button>
+  </div>
+</form>
