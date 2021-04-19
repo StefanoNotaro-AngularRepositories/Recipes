@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import * as _ from 'underscore';
+
 import { LoginService } from '../../core/services/login.service';
 import { IngredientDialogComponent } from './dialogs/ingredient-dialog/ingredient-dialog.component';
 import { IngredientUnits } from './models/ingredient-units.interface';
 import { Ingredient } from './models/ingredient.interface';
 import { IngredientsUnitsService } from './services/ingredients-units.service';
 import { IngredientsService } from './services/ingredients.service';
-import * as _ from 'underscore';
 
 @Component({
   selector: 'app-ingredients',
