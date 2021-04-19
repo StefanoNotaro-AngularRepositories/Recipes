@@ -6,6 +6,7 @@ import { IngredientUnits } from './models/ingredient-units.interface';
 import { Ingredient } from './models/ingredient.interface';
 import { IngredientsUnitsService } from './services/ingredients-units.service';
 import { IngredientsService } from './services/ingredients.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-ingredients',
@@ -26,6 +27,7 @@ export class IngredientsComponent implements OnInit {
   ngOnInit(): void {
     this.ingredientsService.get().subscribe(ingredients => {
       this.ingredients = ingredients;
+      this.ingredients = _.sortBy(this.ingredients, 'name');
     });
 
     this.ingredientsUnitsService.get().subscribe(x => {
