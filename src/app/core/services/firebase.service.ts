@@ -17,9 +17,9 @@ export class FirebaseService {
     return collection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as T;
-          const id = a.payload.doc.id;
-          return { id, ...data } as T;
+          const data = a.payload.doc.data() as any;
+          data.id = a.payload.doc.id;
+          return data as T;
         });
       })
     );

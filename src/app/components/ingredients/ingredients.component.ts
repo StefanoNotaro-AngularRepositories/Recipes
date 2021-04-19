@@ -32,7 +32,9 @@ export class IngredientsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((ingredientResult: Ingredient) => {
       if (ingredientResult) {
-        this.ingredientsService.post(ingredientResult);
+        this.ingredientsService.post(ingredientResult).then(x => {
+          console.log(x);
+        });
       }
     });
   }
