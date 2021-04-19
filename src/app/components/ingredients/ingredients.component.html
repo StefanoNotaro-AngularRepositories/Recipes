@@ -20,7 +20,7 @@
 
     <strong>Unidad de medida:</strong> {{ getIngredientUnitName(ingredient) }}
 
-    <mat-action-row>
+    <mat-action-row *ngIf="isLogin">
       <button mat-button color="warn" (click)="deleteIngredient(ingredient)">Borrar</button>
       <button mat-raised-button (click)="editIngredient(ingredient)">Editar</button>
     </mat-action-row>
