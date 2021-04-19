@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const angularMaterialModules = [
   MatSidenavModule,
@@ -20,6 +21,7 @@ const angularMaterialModules = [
   MatSelectModule,
   MatCardModule,
   MatListModule,
+  MatExpansionModule,
 ];
 
 @NgModule({

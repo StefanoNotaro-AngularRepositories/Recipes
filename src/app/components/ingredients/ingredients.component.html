@@ -7,6 +7,22 @@
   </div>
 </div>
 
-<mat-card *ngFor="let ingredient of ingredients">
-  Nombre: {{ ingredient.name }}. Precio: {{ ingredient.price }}
-</mat-card>
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel hideToggle *ngFor="let ingredient of ingredients">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ ingredient.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ ingredient.price | currency: '' : 'symbol' : '1.0-0' }} / {{getIngredientUnitAbbreviation(ingredient)}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <strong>Unidad de medida:</strong> {{ getIngredientUnitName(ingredient) }}
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="deleteIngredient(ingredient)">Borrar</button>
+      <button mat-raised-button (click)="editIngredient(ingredient)">Editar</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

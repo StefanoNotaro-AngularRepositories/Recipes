@@ -18,6 +18,7 @@ export class IngredientDialogComponent implements OnInit {
   public get name(): AbstractControl { return this.ingredientForm.controls.name; }
   public get unit(): AbstractControl { return this.ingredientForm.controls.unit; }
   public get price(): AbstractControl { return this.ingredientForm.controls.price; }
+  public get isEdit(): boolean { return this.data != null }
 
   constructor(
     public dialogRef: MatDialogRef<IngredientDialogComponent>,
@@ -28,6 +29,7 @@ export class IngredientDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.ingredientForm = this.formBuilder.group({
+      id: new FormControl(),
       name: new FormControl('', [Validators.required]),
       unit: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
@@ -35,10 +37,14 @@ export class IngredientDialogComponent implements OnInit {
 
     this.ingredientUnitsService.get().subscribe(x => {
       this.ingredientUnits = x;
+
     });
 
     if (this.data) {
-      // this.ingredientForm.setValue(this.data);
+      this.ingredientForm.controls.id.setValue(this.data.id);
+      this.ingredientForm.controls.name.setValue(this.data.name);
+      this.ingredientForm.controls.price.setValue(this.data.price);
+      this.ingredientForm.controls.unit.setValue(this.data.unit);
     }
   }
 
