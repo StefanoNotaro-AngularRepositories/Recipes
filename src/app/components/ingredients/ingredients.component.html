@@ -14,11 +14,11 @@
         {{ ingredient.name }}
       </mat-panel-title>
       <mat-panel-description>
-        {{ ingredient.price | currency: '' : 'symbol' : '1.0-0' }}
+        {{ ingredient.price | currency: '' : 'symbol' : '1.0-0' }} / {{getIngredientUnitAbbreviation(ingredient)}}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    {{ ingredient.unit }}
+    <strong>Unidad de medida:</strong> {{ getIngredientUnitName(ingredient) }}
 
     <mat-action-row>
       <button mat-button color="warn" (click)="deleteIngredient(ingredient)">Borrar</button>
