@@ -1,10 +1,12 @@
 <div class="container mt-3">
   <div class="row">
     <h1 class="mr-auto">Ingredientes</h1>
-    <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon"
-      (click)="openAddIngredientDialog()">
+    <button mat-mini-fab color="primary" *ngIf="isLogin" (click)="openAddIngredientDialog()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
 </div>
-<p *ngFor="let ingredient of ingredients">Nombre: {{ ingredient.name }}. Precio: {{ ingredient.price }}</p>
+
+<mat-card *ngFor="let ingredient of ingredients">
+  Nombre: {{ ingredient.name }}. Precio: {{ ingredient.price }}
+</mat-card>
