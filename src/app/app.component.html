@@ -1,4 +1,35 @@
-<app-navbar></app-navbar>
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<!-- <app-navbar></app-navbar> -->
+<nav class="navbar navbar-light">
+  <button type="button" mat-icon-button class="px-0" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a href="/" class="navbar-brand mr-auto">
+    <img src="assets/images/logo.png" width="30" height="30" class="d-inline-block align-top mr-2" alt="">
+    Cara de torta
+  </a>
+  <form class="form-inline">
+    <button class="btn my-2 my-sm-0" [ngClass]="{ 
+      'btn-success': !isLogin,
+      'btn-danger': isLogin
+    }" type="button" (click)="onClick()">
+      {{!isLogin ? 'Login' : 'Logout'}}
+    </button>
+  </form>
+</nav>
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #drawer class="sidenav-sidenav" mode="side">
+    <mat-selection-list [multiple]="false">
+      <mat-list-option [routerLink]="'recipes'">
+        <mat-icon mat-list-icon>menu_book</mat-icon>Recetas
+      </mat-list-option>
+      <mat-list-option [routerLink]="'ingredients'">
+        <mat-icon mat-list-icon>ballot</mat-icon>Ingredientes
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-drawer>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>
