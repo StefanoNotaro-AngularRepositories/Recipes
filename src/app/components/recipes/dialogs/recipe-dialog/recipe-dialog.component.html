@@ -13,17 +13,59 @@
           <mat-error *ngIf="name.invalid">El nombre es obligatorio</mat-error>
         </mat-form-field>
 
-        <mat-form-field class="col-6">
-          <mat-label>Ingredientes</mat-label>
-          <mat-select formControlName="ingredients" multiple>
-            <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</mat-option>
-          </mat-select>
-          <button mat-button *ngIf="formIngredients.value" matSuffix mat-icon-button aria-label="Clear" type="button"
-            (click)="formIngredients.setValue('')">
-            <mat-icon>close</mat-icon>
-          </button>
-          <mat-error *ngIf="name.invalid">La unidad de medida es obligatoria</mat-error>
-        </mat-form-field>
+        <div class="col-12">
+          Ingredientes
+          <table mat-table [dataSource]="dataSource">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> ID. </th>
+              <td mat-cell *matCellDef="let element"> {{element.ingredient}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.ingredientName}} </td>
+            </ng-container>
+
+            <!-- Amount Column -->
+            <ng-container matColumnDef="amount">
+              <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+              <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+            </ng-container>
+
+            <!-- Unit Column -->
+            <ng-container matColumnDef="unit">
+              <th mat-header-cell *matHeaderCellDef> Unidad de medida </th>
+              <td mat-cell *matCellDef="let element"> {{element.unitAbbreviation}} </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Acción </th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-mini-fab color="warn" type="button" class="mr-2" (click)="onDeleteIngredient(row)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-mini-fab color="primary" type="button" (click)="onEditIngredient(row)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-list role="list">
+            <mat-list-item id="add-ingredient" role="listitem" (click)="onAddIngredient()">
+              <mat-icon>add</mat-icon> Agregar Ingrediente
+            </mat-list-item>
+          </mat-list>
+        </div>
       </div>
     </div>
   </div>

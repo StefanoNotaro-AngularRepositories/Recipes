@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
 
 const angularMaterialModules = [
   MatSidenavModule,
@@ -22,6 +24,8 @@ const angularMaterialModules = [
   MatCardModule,
   MatListModule,
   MatExpansionModule,
+  MatDividerModule,
+  MatTableModule,
 ];
 
 @NgModule({

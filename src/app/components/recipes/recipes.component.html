@@ -8,22 +8,56 @@
 </div>
 
 <mat-accordion class="example-headers-align">
-  <mat-expansion-panel hideToggle *ngFor="let recipe of recipes">
+  <mat-expansion-panel hideToggle *ngFor="let recipe of recipesVM">
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title class="d-flex align-items-center"
+        [class.price-error]="recipe.price !== recipe.calculatedIngredientsPrice">
         {{ recipe.name }}
       </mat-panel-title>
       <mat-panel-description>
-        {{ recipe.price | currency: '' : 'symbol' : '1.0-0' }}
+        <span *ngIf="recipe.price === recipe.calculatedIngredientsPrice">
+          Precio: {{ recipe.price | currency }}
+        </span>
+        <span *ngIf="recipe.price !== recipe.calculatedIngredientsPrice">
+          Precio Guardado: {{ recipe.price | currency }} <br>
+          Precio Calculado: {{ recipe.calculatedIngredientsPrice | currency }}
+        </span>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    Ingredientes: <br>
-    <mat-list role="list">
-      <mat-list-item role="listitem" *ngFor="let ingredient of recipe.ingredientsObjects">
-        {{ ingredient.name }}
-      </mat-list-item>
-    </mat-list>
+    Ingredientes:
+    <table mat-table [dataSource]="recipe.ingredientDataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID. </th>
+        <td mat-cell *matCellDef="let element"> {{element.ingredient}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.ingredientName}} </td>
+      </ng-container>
+
+      <!-- Amount Column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+        <td mat-cell *matCellDef="let element"> {{element.amount}} {{ element.unitAbbreviation }} </td>
+      </ng-container>
+
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Precio </th>
+        <td mat-cell *matCellDef="let element"> {{element.price  | currency}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
     <mat-action-row *ngIf="isLogin">
       <button mat-button color="warn" (click)="deleteRecipe(recipe)">Borrar</button>

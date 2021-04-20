@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+.price-error {
+  &::before {
+    font-size: 2rem;
+    content: '•';
+    color: red;
+    margin-right: 1rem;
+  }
+}
