@@ -1,0 +1,22 @@
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title>{{ isEdit ? 'Editar' : 'Agregar'}} receta</h1>
+  <div mat-dialog-content>
+    <div class="container">
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name">
+          <button mat-button *ngIf="name.value" matSuffix mat-icon-button aria-label="Clear" type="button"
+            (click)="name.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="name.invalid">El nombre es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="d-flex float-right">
+    <button mat-button (click)="onNoClick()" type="button">Cancelar</button>
+    <button mat-button color="primary" type="submit" cdkFocusInitial>Guardar</button>
+  </div>
+</form>

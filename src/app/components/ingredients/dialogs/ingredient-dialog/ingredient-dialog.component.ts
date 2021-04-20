@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import * as _ from 'underscore';
 
 import { IngredientUnits as IngredientUnit } from '../../models/ingredient-units.interface';
 import { Ingredient } from '../../models/ingredient.interface';
@@ -19,7 +20,7 @@ export class IngredientDialogComponent implements OnInit {
   public get name(): AbstractControl { return this.ingredientForm.controls.name; }
   public get unit(): AbstractControl { return this.ingredientForm.controls.unit; }
   public get price(): AbstractControl { return this.ingredientForm.controls.price; }
-  public get isEdit(): boolean { return this.data != null }
+  public get isEdit(): boolean { return this.data != null; }
 
   constructor(
     public dialogRef: MatDialogRef<IngredientDialogComponent>,
@@ -29,24 +30,11 @@ export class IngredientDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ingredientForm = this.formBuilder.group({
-      id: new FormControl(),
-      name: new FormControl('', [Validators.required]),
-      unit: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
-    });
+    this.createIngredientsForm();
 
     this.ingredientUnitsService.get().subscribe(x => {
-      this.ingredientUnits = x;
-
+      this.ingredientUnits = _.sortBy(x, 'name');
     });
-
-    if (this.data) {
-      this.ingredientForm.controls.id.setValue(this.data.id);
-      this.ingredientForm.controls.name.setValue(this.data.name);
-      this.ingredientForm.controls.price.setValue(this.data.price);
-      this.ingredientForm.controls.unit.setValue(this.data.unit);
-    }
   }
 
   public onNoClick(): void {
@@ -56,6 +44,22 @@ export class IngredientDialogComponent implements OnInit {
   public onSubmit(): void {
     if (this.ingredientForm.valid) {
       this.dialogRef.close(this.ingredientForm.value);
+    }
+  }
+
+  private createIngredientsForm(): void {
+    this.ingredientForm = this.formBuilder.group({
+      id: new FormControl(),
+      name: new FormControl('', [Validators.required]),
+      unit: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required]),
+    });
+
+    if (this.data) {
+      this.ingredientForm.controls.id.setValue(this.data.id);
+      this.ingredientForm.controls.name.setValue(this.data.name);
+      this.ingredientForm.controls.price.setValue(this.data.price);
+      this.ingredientForm.controls.unit.setValue(this.data.unit);
     }
   }
 

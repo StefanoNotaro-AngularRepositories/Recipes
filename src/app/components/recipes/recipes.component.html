@@ -1,3 +1,28 @@
-<p>
-  recipes works!
-</p>
+<div class="container mt-3">
+  <div class="row">
+    <h1 class="mr-auto">Recetas</h1>
+    <button mat-mini-fab color="primary" *ngIf="isLogin" (click)="openAddRecipeDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel hideToggle *ngFor="let recipe of recipes">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ recipe.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ 213 | currency: '' : 'symbol' : '1.0-0' }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    Contenido
+
+    <mat-action-row *ngIf="isLogin">
+      <button mat-button color="warn" (click)="deleteRecipe(recipe)">Borrar</button>
+      <button mat-raised-button (click)="editRecipe(recipe)">Editar</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
