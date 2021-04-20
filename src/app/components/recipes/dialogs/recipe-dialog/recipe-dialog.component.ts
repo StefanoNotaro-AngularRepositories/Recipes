@@ -86,14 +86,7 @@ export class RecipeDialogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: RecipeIngredientDataSource) => {
       if (result) {
-        const ingredient = this.ingredients.find(y => y.id === result.ingredient);
-        const ingredientUnit = this.dataIngredientsUnits.find(y => y.id === ingredient?.unit);
-        const resultUnit = this.dataIngredientsUnits.find(y => y.id === result.unit);
-
-        result.price = (((ingredient?.price ?? 0) / (resultUnit?.value ?? 1)) * result.amount) / (ingredientUnit?.value ?? 1);
-        this.dataSource.push(result);
-
-        this.dataSource = _.sortBy(this.dataSource, 'ingredientName');
+        this.handleRecipeIngredient(result);
       }
     });
   }
@@ -104,18 +97,22 @@ export class RecipeDialogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: RecipeIngredientDataSource) => {
       if (result) {
-        const ingredient = this.ingredients.find(y => y.id === result.ingredient);
-        const ingredientUnit = this.dataIngredientsUnits.find(y => y.id === ingredient?.unit);
-        const resultUnit = this.dataIngredientsUnits.find(y => y.id === result.unit);
-
-        result.price = (((ingredient?.price ?? 0) / (resultUnit?.value ?? 1)) * result.amount) / (ingredientUnit?.value ?? 1);
-
-        this.dataSource = this.dataSource.filter(x => x.ingredient !== dataSourceItem?.ingredient);
-        this.dataSource.push(result);
-
-        this.dataSource = _.sortBy(this.dataSource, 'ingredientName');
+        this.handleRecipeIngredient(result, dataSourceItem);
       }
     });
+  }
+
+  private handleRecipeIngredient(result: RecipeIngredientDataSource, dataSourceItem?: RecipeIngredientDataSource): void {
+    const ingredient = this.ingredients.find(y => y.id === result.ingredient);
+    const ingredientUnit = this.dataIngredientsUnits.find(y => y.id === ingredient?.unit);
+    const resultUnit = this.dataIngredientsUnits.find(y => y.id === result.unit);
+
+    this.dataSource = this.dataSource.filter(x => x.ingredient !== (dataSourceItem?.ingredient ?? result.ingredient));
+
+    result.price = (((ingredient?.price ?? 0) / (resultUnit?.value ?? 1)) * result.amount) / (ingredientUnit?.value ?? 1);
+    this.dataSource.push(result);
+
+    this.dataSource = _.sortBy(this.dataSource, 'ingredientName');
   }
 
   private createRecipeForm(): void {
