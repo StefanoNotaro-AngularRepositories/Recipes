@@ -12,6 +12,18 @@
           </button>
           <mat-error *ngIf="name.invalid">El nombre es obligatorio</mat-error>
         </mat-form-field>
+
+        <mat-form-field class="col-6">
+          <mat-label>Ingredientes</mat-label>
+          <mat-select formControlName="ingredients" multiple>
+            <mat-option *ngFor="let ingredient of ingredients" [value]="ingredient.id">{{ingredient.name}}</mat-option>
+          </mat-select>
+          <button mat-button *ngIf="formIngredients.value" matSuffix mat-icon-button aria-label="Clear" type="button"
+            (click)="formIngredients.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-error *ngIf="name.invalid">La unidad de medida es obligatoria</mat-error>
+        </mat-form-field>
       </div>
     </div>
   </div>
