@@ -27,8 +27,7 @@ export class IngredientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.ingredientsService.get().subscribe(ingredients => {
-      this.ingredients = ingredients;
-      this.ingredients = _.sortBy(this.ingredients, 'name');
+      this.ingredients = _.sortBy(ingredients, 'name');
     });
 
     this.ingredientsUnitsService.get().subscribe(x => {
@@ -51,9 +50,7 @@ export class IngredientsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((ingredientResult: Ingredient) => {
       if (ingredientResult) {
-        this.ingredientsService.post(ingredientResult).then(x => {
-          console.log(x);
-        });
+        this.ingredientsService.post(ingredientResult);
       }
     });
   }
