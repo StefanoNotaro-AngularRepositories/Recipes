@@ -67,16 +67,21 @@ export class RecipesComponent implements OnInit {
   }
 
   private getRecipeIngredientsDataSource(recipe: Recipe): RecipeIngredientDataSource[] {
-    let result = recipe.ingredients.map(x => {
-      const ingredient = this.ingredients.find(y => y.id === x.ingredient);
+    let result = recipe.ingredients.map(recipeIngredient => {
+      const ingredient = this.ingredients.find(y => y.id === recipeIngredient.ingredient);
       const ingredientUnit = this.ingredientUnits.find(y => y.id === ingredient?.unit);
-      const resultIngredientUnit = this.ingredientUnits.find(y => y.id === x.unit);
+      const resultIngredientUnit = this.ingredientUnits.find(y => y.id === recipeIngredient.unit);
 
-      const resultIngredientPrice = (((ingredient?.price ?? 0) / (resultIngredientUnit?.value ?? 1)) * x.amount) / (ingredientUnit?.value ?? 1);
+      let resultIngredientPrice: number;
+      if (ingredientUnit?.id !== resultIngredientUnit?.id) {
+        resultIngredientPrice = (((ingredient?.price ?? 0) / (resultIngredientUnit?.value ?? 1)) * recipeIngredient.amount) / (ingredientUnit?.value ?? 1);
+      } else {
+        resultIngredientPrice = ((ingredient?.price ?? 0) * recipeIngredient.amount);
+      }
 
       return {
-        ingredient: x.ingredient,
-        amount: x.amount,
+        ingredient: recipeIngredient.ingredient,
+        amount: recipeIngredient.amount,
         ingredientName: ingredient?.name ?? '',
         unitAbbreviation: resultIngredientUnit?.abbreviation ?? '',
         unit: resultIngredientUnit?.id ?? '',
